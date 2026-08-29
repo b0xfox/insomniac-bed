@@ -1,0 +1,20 @@
+{
+  "values": [
+    "insomniac-bed:red_bed",
+    "insomniac-bed:black_bed",
+    "insomniac-bed:blue_bed",
+    "insomniac-bed:brown_bed",
+    "insomniac-bed:cyan_bed",
+    "insomniac-bed:gray_bed",
+    "insomniac-bed:green_bed",
+    "insomniac-bed:light_blue_bed",
+    "insomniac-bed:light_gray_bed",
+    "insomniac-bed:lime_bed",
+    "insomniac-bed:magenta_bed",
+    "insomniac-bed:orange_bed",
+    "insomniac-bed:pink_bed",
+    "insomniac-bed:purple_bed",
+    "insomniac-bed:white_bed",
+    "insomniac-bed:yellow_bed"
+  ]
+}

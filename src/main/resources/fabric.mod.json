@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "insomniac-bed",
+  "version": "${version}",
+  "name": "Insomniac Bed",
+  "description": "Adds duplicate bed blocks that ignore sleeping behaviors",
+  "authors": [
+    "b0xfox"
+  ],
+  "contact": {
+    "sources": "https://github.com/b0xfox/insomniac-bed"
+  },
+  "license": "MIT",
+  "icon": "assets/insomniac-bed/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.b0xfox.insomniac_bed.InsomniacBed"
+    ],
+    "client": [
+      "io.github.b0xfox.insomniac_bed.InsomniacBedClient"
+    ]
+  },
+  "mixins": [
+    "insomniac-bed.mixins.json",
+    {
+      "config": "insomniac-bed.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.2",
+    "minecraft": "~1.21.4",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
