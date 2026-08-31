@@ -1,12 +1,15 @@
 package io.github.b0xfox.insomniac_bed.block;
 
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.BedPart;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.hit.BlockHitResult;
@@ -43,6 +46,10 @@ public class InsomniacBedBlock extends BedBlock {
             return ActionResult.SUCCESS_SERVER;
         } else {
             player.sleep(pos);
+            if (!world.isClient() && player instanceof ServerPlayerEntity serverPlayer) {
+                player.incrementStat(Stats.SLEEP_IN_BED);
+                Criteria.SLEPT_IN_BED.trigger(serverPlayer);
+            }
             world.playSound(null, pos, SoundEvents.BLOCK_WOOD_HIT, SoundCategory.BLOCKS, 0.15f, 1.5f);
         }
 
