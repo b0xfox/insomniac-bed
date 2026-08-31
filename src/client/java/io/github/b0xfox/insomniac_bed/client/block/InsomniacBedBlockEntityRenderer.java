@@ -1,8 +1,8 @@
-package io.github.b0xfox.insomniac_bed.block;
+package io.github.b0xfox.insomniac_bed.client.block;
 
+import io.github.b0xfox.insomniac_bed.block.InsomniacBedBlockEntity;
+import io.github.b0xfox.insomniac_bed.block.ModBlocks;
 import it.unimi.dsi.fastutil.ints.Int2IntFunction;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
@@ -23,7 +23,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.World;
 
-@Environment(EnvType.CLIENT)
 public class InsomniacBedBlockEntityRenderer implements BlockEntityRenderer<InsomniacBedBlockEntity> {
     private final Model bedHead;
     private final Model bedFoot;

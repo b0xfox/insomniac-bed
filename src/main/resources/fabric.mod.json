@@ -11,14 +11,14 @@
     "sources": "https://github.com/b0xfox/insomniac-bed"
   },
   "license": "MIT",
-  "icon": "assets/insomniac-bed/icon.png",
+  "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
       "io.github.b0xfox.insomniac_bed.InsomniacBed"
     ],
     "client": [
-      "io.github.b0xfox.insomniac_bed.InsomniacBedClient"
+      "io.github.b0xfox.insomniac_bed.client.InsomniacBedClient"
     ]
   },
   "mixins": [

@@ -4,16 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.b0xfox.insomniac_bed.InsomniacBed;
-import io.github.b0xfox.insomniac_bed.item.ModItemGroups;
 import io.github.b0xfox.insomniac_bed.item.ModItems;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.item.BedItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;

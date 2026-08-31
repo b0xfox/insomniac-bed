@@ -1,16 +1,15 @@
 package io.github.b0xfox.insomniac_bed;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.github.b0xfox.insomniac_bed.block.InsomniacBedBlock;
 import io.github.b0xfox.insomniac_bed.block.ModBlocks;
+import io.github.b0xfox.insomniac_bed.command.ModCommands;
+import io.github.b0xfox.insomniac_bed.data.BedConfig;
+import io.github.b0xfox.insomniac_bed.event.ModEvents;
 import io.github.b0xfox.insomniac_bed.item.ModItemGroups;
 
 public class InsomniacBed implements ModInitializer {
@@ -20,20 +19,13 @@ public class InsomniacBed implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-        
+
         ModItemGroups.initialize();
         ModBlocks.initialize();
+        ModCommands.initialize();
+        ModEvents.initialize();
+        BedConfig.initialize();
 
-        EntitySleepEvents.ALLOW_SLEEP_TIME.register((player, sleepingPos, vanillaResult) -> {
-
-            World world = player.getWorld();
-
-            if (world != null && world.getBlockState(sleepingPos).getBlock() instanceof InsomniacBedBlock) {
-                return ActionResult.SUCCESS;
-            }
-
-            return ActionResult.PASS;
-        });
 	}
 
 	public static Identifier id(String path) {

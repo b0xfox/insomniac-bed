@@ -1,6 +1,6 @@
 package io.github.b0xfox.insomniac_bed.mixin;
 
-import io.github.b0xfox.insomniac_bed.InsomniacBedUtil;
+import io.github.b0xfox.insomniac_bed.data.BedConfig;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.SleepManager;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,7 +20,7 @@ public class IgnoreSleepMixin {
     )
     private List<ServerPlayerEntity> filterExemptSleepers(List<ServerPlayerEntity> players) {
         return players.stream()
-                .filter(player -> !InsomniacBedUtil.isSleepingInInsomniacBed(player))
+                .filter(player -> BedConfig.isTimeSkippingEnabled(player))
                 .collect(Collectors.toList());
     }
 }

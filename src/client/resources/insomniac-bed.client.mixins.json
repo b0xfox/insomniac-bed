@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "io.github.b0xfox.insomniac_bed.mixin.client",
+	"package": "io.github.b0xfox.insomniac_bed.client.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"NoSleepChatScreenMixin",

@@ -1,18 +1,15 @@
-package io.github.b0xfox.insomniac_bed.mixin.client;
+package io.github.b0xfox.insomniac_bed.client.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.SleepingChatScreen;
-import io.github.b0xfox.insomniac_bed.InsomniacBedUtil;
+import io.github.b0xfox.insomniac_bed.client.data.ClientBedConfig;
 
-@Environment(EnvType.CLIENT)
 @Mixin(MinecraftClient.class)
 public class NoSleepChatScreenMixin {
 
@@ -29,7 +26,7 @@ public class NoSleepChatScreenMixin {
             if (!client.player.isSleeping())
                 return;
 
-            if (InsomniacBedUtil.isSleepingInInsomniacBed(client.player))
+            if (!ClientBedConfig.isGuiEnabled(client.player))
                 ci.cancel();
         }
     }
