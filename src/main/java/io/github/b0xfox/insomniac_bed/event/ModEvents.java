@@ -1,5 +1,6 @@
 package io.github.b0xfox.insomniac_bed.event;
 
+import io.github.b0xfox.insomniac_bed.InsomniacBedUtil;
 import io.github.b0xfox.insomniac_bed.data.BedConfig;
 import io.github.b0xfox.insomniac_bed.data.BedConfigData;
 import io.github.b0xfox.insomniac_bed.data.BedConfigState;
@@ -22,8 +23,13 @@ public class ModEvents {
 
     private static ActionResult allowSleepTime(PlayerEntity player, BlockPos sleepingPos, boolean vanillaResult) {
 
-        if (player instanceof ServerPlayerEntity serverPlayer && BedConfig.isTimeSkippingEnabled(serverPlayer))
-            return ActionResult.SUCCESS;
+        if (player instanceof ServerPlayerEntity serverPlayer) {
+
+            if (BedConfig.isLimitsEnabled(serverPlayer) == false || InsomniacBedUtil.isSleepingInInsomniacBed(player)) {
+
+                return ActionResult.SUCCESS;
+            }
+        }
 
         return ActionResult.PASS;
     }

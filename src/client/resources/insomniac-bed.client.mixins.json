@@ -4,8 +4,9 @@
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"NoSleepChatScreenMixin",
-		"RendererMixin",
-		"SleepOverlayMixin"
+		"SleepOverlayMixin",
+		"SleepingRotationMixin",
+		"UnlockPitchMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

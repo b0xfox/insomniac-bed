@@ -29,6 +29,10 @@ public class ClientBedConfig {
         return clientBedConfig.timeEnabled();
     }
 
+    public static boolean isLimitsEnabled(ClientPlayerEntity player) {
+        return clientBedConfig.limitsEnabled();
+    }
+
     public static boolean isGuiEnabled(ClientPlayerEntity player) {
         return clientBedConfig.guiEnabled();
     }

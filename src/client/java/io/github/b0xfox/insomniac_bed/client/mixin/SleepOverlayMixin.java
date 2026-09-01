@@ -19,10 +19,10 @@ public class SleepOverlayMixin {
 
         MinecraftClient client = MinecraftClient.getInstance();
 
-        if (client.player == null)
+        if (client.player == null || !client.player.isSleeping())
             return;
 
-        if (ClientBedConfig.isDarknessEnabled(client.player))
+        if (ClientBedConfig.isDarknessEnabled(client.player) == false)
             ci.cancel();
     }
 }

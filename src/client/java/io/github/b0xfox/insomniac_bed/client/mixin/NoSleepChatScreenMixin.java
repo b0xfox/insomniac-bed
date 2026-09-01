@@ -10,6 +10,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.SleepingChatScreen;
 import io.github.b0xfox.insomniac_bed.client.data.ClientBedConfig;
 
+@SuppressWarnings("resource")
 @Mixin(MinecraftClient.class)
 public class NoSleepChatScreenMixin {
 
@@ -20,13 +21,10 @@ public class NoSleepChatScreenMixin {
 
             MinecraftClient client = (MinecraftClient) (Object) this;
 
-            if (client.player == null)
+            if (client.player == null || !client.player.isSleeping())
                 return;
 
-            if (!client.player.isSleeping())
-                return;
-
-            if (!ClientBedConfig.isGuiEnabled(client.player))
+            if (ClientBedConfig.isGuiEnabled(client.player) == false)
                 ci.cancel();
         }
     }

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Mixin(SleepManager.class)
-public class IgnoreSleepMixin {
+public class IgnoreSleepCountMixin {
 
     @ModifyVariable(
         method = "update",
@@ -20,7 +20,7 @@ public class IgnoreSleepMixin {
     )
     private List<ServerPlayerEntity> filterExemptSleepers(List<ServerPlayerEntity> players) {
         return players.stream()
-                .filter(player -> BedConfig.isTimeSkippingEnabled(player))
+                .filter(player -> BedConfig.isTimeSkippingEnabled(player) == true)
                 .collect(Collectors.toList());
     }
 }

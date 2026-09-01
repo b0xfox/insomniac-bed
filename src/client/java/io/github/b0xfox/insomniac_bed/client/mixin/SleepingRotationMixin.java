@@ -13,13 +13,13 @@ import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.entity.LivingEntity;
 
 @Mixin(LivingEntityRenderer.class)
-public abstract class RendererMixin<T extends LivingEntity, S extends LivingEntityRenderState, M extends EntityModel<? super S>> {
+public abstract class SleepingRotationMixin<T extends LivingEntity, S extends LivingEntityRenderState, M extends EntityModel<? super S>> {
 
     @Inject(method = "updateRenderState", at = @At("TAIL"))
     private void forceSleepingHeadState(T livingEntity, S state, float tickDelta, CallbackInfo ci) {
 
         if (livingEntity instanceof ClientPlayerEntity player) {
-            if (!ClientBedConfig.isGuiEnabled(player)) {
+            if (livingEntity.isSleeping() && ClientBedConfig.isGuiEnabled(player) == false) {
                 state.pitch = 0.0F;
                 state.yawDegrees = 0.0F;
             }

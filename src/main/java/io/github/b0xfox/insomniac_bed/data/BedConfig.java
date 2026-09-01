@@ -34,6 +34,18 @@ public class BedConfig {
         return true;
     }
 
+    public static boolean isLimitsEnabled(ServerPlayerEntity player) {
+
+        BedConfigState state = BedConfigState.getServerState(player.getServerWorld());
+        BedConfigData data = state.getByUUID(player.getUuid());
+
+        if (data != null) {
+            return data.limitsEnabled();
+        }
+
+        return true;
+    }
+
     public static boolean isGuiEnabled(ServerPlayerEntity player) {
 
         BedConfigState state = BedConfigState.getServerState(player.getServerWorld());

@@ -26,9 +26,13 @@ public class BedConfigCommand {
                                         .executes(BedConfigCommand::runToggleDarkness))
 
                         .then(
-                                CommandManager.literal("time_skip")
+                                CommandManager.literal("advance_time")
                                         .then(CommandManager.argument("enabled", BoolArgumentType.bool()))
                                         .executes(BedConfigCommand::runToggleTimeSkipping))
+                        .then(
+                                CommandManager.literal("limits")
+                                        .then(CommandManager.argument("enabled", BoolArgumentType.bool()))
+                                        .executes(BedConfigCommand::runToggleLimits))
 
                         .then(
                                 CommandManager.literal("gui")
@@ -69,10 +73,11 @@ public class BedConfigCommand {
             BedConfigData updatedData = new BedConfigData(
                     !data.darknessEnabled(),
                     data.timeEnabled(),
+                    data.limitsEnabled(),
                     data.guiEnabled());
 
             state.setByUUID(serverPlayer.getUuid(), updatedData);
-            BedConfig.sync(serverPlayer, data);
+            BedConfig.sync(serverPlayer, updatedData);
             listConfigData(serverPlayer, updatedData);
 
             return updatedData.darknessEnabled() ? 1 : 0;
@@ -95,13 +100,41 @@ public class BedConfigCommand {
             BedConfigData updatedData = new BedConfigData(
                     data.darknessEnabled(),
                     !data.timeEnabled(),
+                    data.limitsEnabled(),
                     data.guiEnabled());
 
             state.setByUUID(serverPlayer.getUuid(), updatedData);
-            BedConfig.sync(serverPlayer, data);
+            BedConfig.sync(serverPlayer, updatedData);
             listConfigData(serverPlayer, updatedData);
 
             return updatedData.timeEnabled() ? 1 : 0;
+        }
+
+        return 0;
+    }
+
+    public static int runToggleLimits(CommandContext<ServerCommandSource> ctx) {
+
+        ServerPlayerEntity serverPlayer = ctx.getSource().getPlayer();
+
+        if (serverPlayer != null) {
+            BedConfigState state = BedConfigState.getServerState(serverPlayer.getServerWorld());
+            BedConfigData data = state.getByUUID(serverPlayer.getUuid());
+
+            if (state == null || data == null)
+                return 0;
+
+            BedConfigData updatedData = new BedConfigData(
+                    data.darknessEnabled(),
+                    data.timeEnabled(),
+                    !data.limitsEnabled(),
+                    data.guiEnabled());
+
+            state.setByUUID(serverPlayer.getUuid(), updatedData);
+            BedConfig.sync(serverPlayer, updatedData);
+            listConfigData(serverPlayer, updatedData);
+
+            return updatedData.limitsEnabled() ? 1 : 0;
         }
 
         return 0;
@@ -121,10 +154,11 @@ public class BedConfigCommand {
             BedConfigData updatedData = new BedConfigData(
                     data.darknessEnabled(),
                     data.timeEnabled(),
+                    data.limitsEnabled(),
                     !data.guiEnabled());
 
             state.setByUUID(serverPlayer.getUuid(), updatedData);
-            BedConfig.sync(serverPlayer, data);
+            BedConfig.sync(serverPlayer, updatedData);
             listConfigData(serverPlayer, updatedData);
 
             return updatedData.guiEnabled() ? 1 : 0;
@@ -139,8 +173,8 @@ public class BedConfigCommand {
             return;
 
         player.sendMessage(Text
-        .literal("Bed Config Options").formatted(Formatting.YELLOW, Formatting.BOLD)
-        .append(Text.literal(" -- ").formatted(Formatting.YELLOW,Formatting.RESET))
+        .literal("Bed Config Options").formatted(Formatting.YELLOW)
+        .append(Text.literal(" -- ").formatted(Formatting.YELLOW))
         .append(Text.literal(player.getName().getString()).formatted(Formatting.WHITE))
         .append(Text.literal("\n> ").formatted(Formatting.WHITE))
             .append(Text.literal("Darkness: ").formatted(Formatting.GOLD))
@@ -148,6 +182,9 @@ public class BedConfigCommand {
         .append(Text.literal("\n> ").formatted(Formatting.WHITE))
             .append(Text.literal("Time Skipping: ").formatted(Formatting.GOLD))
             .append(data.timeEnabled() ? Text.literal("true").formatted(Formatting.GREEN) : Text.literal("false").formatted(Formatting.RED))
+        .append(Text.literal("\n> ").formatted(Formatting.WHITE))
+            .append(Text.literal("Sleep Limitations: ").formatted(Formatting.GOLD))
+            .append(data.limitsEnabled() ? Text.literal("true").formatted(Formatting.GREEN) : Text.literal("false").formatted(Formatting.RED))
         .append(Text.literal("\n> ").formatted(Formatting.WHITE))
             .append(Text.literal("Leave Bed GUI: ").formatted(Formatting.GOLD))
             .append(data.guiEnabled() ? Text.literal("true").formatted(Formatting.GREEN) : Text.literal("false").formatted(Formatting.RED))
